@@ -1,0 +1,7 @@
+maintain/
+project*
+data/
+src-compose/
+vendor/
+
+build.sh

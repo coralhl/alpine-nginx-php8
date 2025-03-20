@@ -1,0 +1,9 @@
+.gitignore
+.gitattributes
+*.md
+LICENSE
+
+data/
+src-compose/
+
+build.sh
