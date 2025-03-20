@@ -59,8 +59,8 @@ services:
 | --- | --- | --- |
 | `user` | abc | user inside docker |
 | `user's home` | /home/user | home directory of user abc |
-| `www` | /var/www/html | content directory |
-| `conf` | /var/www/html/conf | you can put your files `nginx.conf` and `nginx-site.conf` in this directory |
+| `www` | /var/www/html | webroot content directory (see `WEBROOT`) |
+| `conf` | /var/www/html/conf | you can put your files `nginx.conf` and `nginx-site.conf` in this directory or your own config file |
 | `scripts` | /var/www/html/scripts | this directory can contain your scripts that will be run when the container starts up |
 | `supervisor logs` | /var/log/supervisor | supervisor logs is saved here by default |
 | `nginx logs` | /var/log/nginx | nginx logs is saved here by default |
@@ -72,7 +72,8 @@ services:
 | `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | Europe/Moscow |
 | `PUID` | non-privileged user id | 1000 |
 | `PGID` | non-privileged group id | 1000 |
-| `CHOWN_WWW` | 1 (on) / - (off) | 0 (not chown /var/www/html) |
+| `WEBROOT` | for example `/home/user/www` | /var/www/html |
+| `CHOWN_WEBROOT` | 1 (on) / - (off) | 0 (not chown `WEBROOT`) |
 | `ERRORS` | 1 (on) / - (off) | 0 (php_flag[display_errors] = off) |
 | `PHP_ERRORS_STDERR` | 1 (on) / - (off) | 0 (/var/log/php/error.log) |
 | `PHP_MEM_LIMIT` | 1024M | memory_limit = 128M |

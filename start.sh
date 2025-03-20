@@ -35,6 +35,13 @@ if [ ! -z "$TZ" ]; then
   rm -f /etc/localtime && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 fi
 
+### Set custom webroot
+if [ ! -z "$WEBROOT" ]; then
+  sed -i "s|root /var/www/html;|root ${WEBROOT};|g" /etc/nginx/conf.d/default.conf
+else
+  WEBROOT="/var/www/html"
+fi
+
 ### Increase the memory_limit
 if [ ! -z "$PHP_MEM_LIMIT" ]; then
   sed -i "s|memory_limit = 128M|memory_limit = ${PHP_MEM_LIMIT}|" /etc/$PHP_VER/conf.d/custom.ini
@@ -95,9 +102,10 @@ PUID                    = $(id -u abc)
 PGID                    = $(id -g abc)
 ───────────────────────────────────────
 TZ                      = $TZ
+WEBROOT                 = $WEBROOT
+CHOWN_WEBROOT           = $CHOWN_WEBROOT
 ERRORS                  = $ERRORS
 RUN_SCRIPTS             = $RUN_SCRIPTS
-CHOWN_WWW               = $CHOWN_WWW 
 ───────────────────────────────────────
 REAL_IP_HEADER          = $REAL_IP_HEADER
 REAL_IP_FROM            = $REAL_IP_FROM
@@ -115,13 +123,13 @@ chown -R abc:abc /etc/supervisor/conf.d/
 chown -R abc:abc /var/log
 
 ### Chown /var/www/html
-if [[ "$CHOWN_WWW" == "1" ]] ; then
-  echo 'Chowning /var/www/html for user abc
-───────────────────────────────────────'
-  chown -R abc:abc /var/www/html
+if [[ "$CHOWN_WEBROOT" == "1" ]] ; then
+  echo "Chowning $WEBROOT for user abc
+───────────────────────────────────────"
+  chown -R abc:abc $WEBROOT
 else
-  echo 'NOT chowning /var/www/html for user abc. Do it yourself
-───────────────────────────────────────'
+  echo "NOT chowning $WEBROOT for user abc. Do it yourself
+───────────────────────────────────────"
 fi
 
 ### Start supervisord and services
