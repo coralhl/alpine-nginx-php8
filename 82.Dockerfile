@@ -13,7 +13,7 @@ ENV TZ=Europe/Moscow
 USER root
 
 # Install packages and remove default server definition
-RUN apk --no-cache --update add ${PHP_VER} \
+RUN apk --no-cache add ${PHP_VER} \
     ${PHP_VER}-bcmath \
     ${PHP_VER}-cli \
     ${PHP_VER}-ctype \
