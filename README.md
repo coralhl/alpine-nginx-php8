@@ -12,14 +12,15 @@
 * Follows the KISS principle (Keep It Simple, Stupid) to make it easy to understand and adjust the image to your needs
 
 ![nginx 1.26.3](https://img.shields.io/badge/nginx-1.26-brightgreen.svg)
+![php 8](https://img.shields.io/badge/php-8.5-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.4-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.3-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.2-brightgreen.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-**Tags:** alpine-nginx-php8: latest, 8.4, 8.3, 8.2
+**Tags:** alpine-nginx-php8: latest, 8.5, 8.4, 8.3, 8.2
 
-**NOTE** If you are upgrading from PHP **8.1 to 8.2** or from **8.2 to 8.3** or from **8.3 to 8.4**, you may need to run `composer update` to upgrade php packages, because some packages under 8.1/8.2 are not supported in 8.2/8.3 or 8.3/8.4
+**NOTE** If you are upgrading from PHP **8.1 to 8.2** or from **8.2 to 8.3** or from **8.3 to 8.4** or from **8.4 to 8.5**, you may need to run `composer update` to upgrade php packages, because some packages under 8.1/8.2 are not supported in 8.2/8.3 or 8.3/8.4 or 8.4/8.4
 
 ## Includes
 

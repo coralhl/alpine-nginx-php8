@@ -1,4 +1,4 @@
-name: build and publish 8.4
+name: build and publish 8.5
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: alpine-nginx-php8
-  IMAGE_TAG: "8.4"
+  IMAGE_TAG: "8.5 latest"
   IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
         id: build_image_multiplatform
         uses: coralhl/buildah-action@main
         with:
-          dockerfile: '84.Dockerfile'
+          dockerfile: '85.Dockerfile'
           image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
           platforms: ${{ env.IMAGE_PLATFORMS }}
@@ -36,11 +36,21 @@ jobs:
           registry_username: ${{ secrets.DOCKERHUB_USERNAME }}
           registry_password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Copy from DH to REG 8.4
+      - name: Copy from DH to REG 8.5
         uses: coralhl/skopeo-action@main
         with:
-          source: docker://${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-          target: docker://${{ secrets.PRIV_REG }}/${{ secrets.PRIV_REG_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          source: docker://${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:8.5
+          target: docker://${{ secrets.PRIV_REG }}/${{ secrets.PRIV_REG_USERNAME }}/${{ env.IMAGE_NAME }}:8.5
+          source_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          source_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          target_username: ${{ secrets.PRIV_REG_USERNAME }}
+          target_password: ${{ secrets.PRIV_REG_PASSWORD }}
+
+      - name: Copy from DH to REG latest
+        uses: coralhl/skopeo-action@main
+        with:
+          source: docker://${{ env.REGISTRY }}/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+          target: docker://${{ secrets.PRIV_REG }}/${{ secrets.PRIV_REG_USERNAME }}/${{ env.IMAGE_NAME }}:latest
           source_username: ${{ secrets.DOCKERHUB_USERNAME }}
           source_password: ${{ secrets.DOCKERHUB_PASSWORD }}
           target_username: ${{ secrets.PRIV_REG_USERNAME }}
