@@ -1,4 +1,4 @@
-FROM coralhl/alpine-base:3.23.3
+FROM coralhl/alpine-base:3.22.3
 
 LABEL Maintainer="coral xciii <coralhl@gmail.com>" \
       Description="Lightweight container with Nginx & PHP-FPM 8 based on Alpine Linux."
