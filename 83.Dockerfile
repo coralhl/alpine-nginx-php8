@@ -1,4 +1,4 @@
-FROM coralhl/alpine-base:latest
+FROM coralhl/alpine-base:3.23.3
 
 LABEL Maintainer="coral xciii <coralhl@gmail.com>" \
       Description="Lightweight container with Nginx & PHP-FPM 8 based on Alpine Linux."
@@ -13,7 +13,7 @@ ENV TZ=Europe/Moscow
 USER root
 
 # Install packages and remove default server definition
-RUN apk --no-cache add ${PHP_VER} \
+RUN apk --no-cache --update add ${PHP_VER} \
     ${PHP_VER}-bcmath \
     ${PHP_VER}-cli \
     ${PHP_VER}-ctype \
@@ -58,6 +58,7 @@ RUN apk --no-cache add ${PHP_VER} \
     bash dcron libcap nginx mysql-client postgresql-client supervisor \
   && ${PHP_VER} -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && ${PHP_VER} composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+  && ln -snf /usr/bin/${PHP_VER} /usr/bin/php \
   && ln -snf /usr/sbin/php-fpm${PHP_VER_NUM} /usr/bin/php-fpm
 
 # Configure Supervisord
