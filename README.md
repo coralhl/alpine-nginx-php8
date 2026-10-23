@@ -11,7 +11,7 @@
 * The servers Nginx, PHP-FPM and supervisord run under a non-privileged user to make it more secure
 * Follows the KISS principle (Keep It Simple, Stupid) to make it easy to understand and adjust the image to your needs
 
-![nginx 1.26.3](https://img.shields.io/badge/nginx-1.26-brightgreen.svg)
+![nginx 1.30.6](https://img.shields.io/badge/nginx-1.30-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.5-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.4-brightgreen.svg)
 ![php 8](https://img.shields.io/badge/php-8.3-brightgreen.svg)
