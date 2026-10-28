@@ -29,7 +29,6 @@ RUN apk --no-cache add ${PHP_VER} \
     ${PHP_VER}-intl \
     ${PHP_VER}-mbstring \
     ${PHP_VER}-mysqli \
-    ${PHP_VER}-opcache \
     ${PHP_VER}-openssl \
     ${PHP_VER}-pcntl \
     ${PHP_VER}-pdo \
