@@ -29,6 +29,7 @@ RUN apk --no-cache add ${PHP_VER} \
     ${PHP_VER}-intl \
     ${PHP_VER}-mbstring \
     ${PHP_VER}-mysqli \
+    ${PHP_VER}-opcache \
     ${PHP_VER}-openssl \
     ${PHP_VER}-pcntl \
     ${PHP_VER}-pdo \
@@ -36,6 +37,8 @@ RUN apk --no-cache add ${PHP_VER} \
     ${PHP_VER}-pdo_pgsql \
     ${PHP_VER}-pdo_sqlite \
     ${PHP_VER}-pgsql \
+    ${PHP_VER}-pecl-apcu \
+    ${PHP_VER}-pecl-igbinary \
     ${PHP_VER}-pecl-imagick \
     ${PHP_VER}-pecl-memcache \
     ${PHP_VER}-pecl-memcached \
@@ -55,6 +58,8 @@ RUN apk --no-cache add ${PHP_VER} \
     ${PHP_VER}-zip \
     ${PHP_VER}-zlib \
     bash dcron libcap nginx mysql-client postgresql-client supervisor \
+    # bitrix utils
+    gifsicle jpegoptim libwebp-tools msmtp optipng \
   && ${PHP_VER} -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && ${PHP_VER} composer-setup.php --install-dir=/usr/local/bin --filename=composer \
   && ln -snf /usr/bin/${PHP_VER} /usr/bin/php \
