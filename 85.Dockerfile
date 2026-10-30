@@ -68,6 +68,7 @@ RUN apk --no-cache add ${PHP_VER} \
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/sv-php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 COPY config/sv-nginx.conf /etc/supervisor/conf.d/nginx.conf
+COPY config/sv-dcron.conf /etc/supervisor/conf.d/dcron.conf
 
 # Configure Nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -88,6 +89,10 @@ RUN  mkdir -p /var/log/supervisor \
   && chown -R abc:abc /var/www/html \
   && chown -R abc:abc /var/log/nginx \
   && chown -R abc:abc /var/log/php \
+  # Set permissions for dcron
+  && addgroup abc cron \
+  && chgrp cron /usr/bin/crontab \
+  && chmod 4750 /usr/bin/crontab \
 # Set default timezone  
   && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 # Set path in php-fpm.conf
@@ -105,6 +110,3 @@ EXPOSE 80
 
 # Let supervisord start nginx & php-fpm
 CMD ["/start.sh"]
-
-# Configure a healthcheck to validate that everything is up&running
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/fpm-ping
